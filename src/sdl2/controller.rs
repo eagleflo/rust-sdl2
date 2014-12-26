@@ -10,7 +10,7 @@ use joystick::{Joystick, JoystickGUID};
 
 pub use sys::controller as ll;
 
-#[derive(Copy, Clone, PartialEq)]
+#[derive(Copy, Clone, PartialEq, Show)]
 #[repr(i32)]
 pub enum ControllerAxis {
     Invalid      = ll::SDL_CONTROLLER_AXIS_INVALID,
@@ -34,7 +34,7 @@ pub fn wrap_controller_axis(bitflags: u8) -> ControllerAxis {
     }
 }
 
-#[derive(Copy, Clone, PartialEq)]
+#[derive(Copy, Clone, PartialEq, Show)]
 #[repr(i32)]
 pub enum ControllerButton {
     Invalid       = ll::SDL_CONTROLLER_BUTTON_INVALID,
