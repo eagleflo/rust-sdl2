@@ -8,17 +8,32 @@ use event;
 
 pub use sys::joystick as ll;
 
-bitflags! {
-    flags HatState: u8 {
-        const CENTEREDHATSTATE = 0,
-        const UPHATSTATE = 0x01,
-        const RIGHTHATSTATE = 0x02,
-        const DOWNHATSTATE = 0x04,
-        const LEFTHATSTATE = 0x08,
-        const RIGHTUPHATSTATE = 0x02 | 0x01,   // RightHatState | UpHatState
-        const RIGHTDOWNHATSTATE = 0x02 | 0x04, // RightHatState | DownHatState,
-        const LEFTUPHATSTATE = 0x08 | 0x01,    // LeftHatState | UpHatState,
-        const LEFTDOWNHATSTATE = 0x08 | 0x04   // LeftHatState | DownHatState
+#[derive(Copy, Clone, PartialEq, Show)]
+#[repr(u8)]
+pub enum HatState {
+    Centered  = ll::SDL_HAT_CENTERED,
+    Up        = ll::SDL_HAT_UP,
+    Right     = ll::SDL_HAT_RIGHT,
+    Down      = ll::SDL_HAT_DOWN,
+    Left      = ll::SDL_HAT_LEFT,
+    RightUp   = ll::SDL_HAT_RIGHTUP,
+    RightDown = ll::SDL_HAT_RIGHTDOWN,
+    LeftUp    = ll::SDL_HAT_LEFTUP,
+    LeftDown  = ll::SDL_HAT_LEFTDOWN
+}
+
+pub fn wrap_hatstate(bitflags: u8) -> HatState {
+    match bitflags {
+        ll::SDL_HAT_CENTERED => HatState::Centered,
+        ll::SDL_HAT_UP => HatState::Up,
+        ll::SDL_HAT_RIGHT=> HatState::Right,
+        ll::SDL_HAT_DOWN => HatState::Down,
+        ll::SDL_HAT_LEFT => HatState::Left,
+        ll::SDL_HAT_RIGHTUP => HatState::RightUp,
+        ll::SDL_HAT_RIGHTDOWN => HatState::RightDown,
+        ll::SDL_HAT_LEFTUP => HatState::LeftUp,
+        ll::SDL_HAT_LEFTDOWN => HatState::LeftDown,
+        _ => panic!("unhandled joystick hatstate")
     }
 }
 

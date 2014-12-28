@@ -11,6 +11,17 @@ pub struct SDL_JoystickGUID {
     pub data: [uint8_t; 16us],
 }
 
+pub type SDL_JoystickHatState = u8;
+pub const SDL_HAT_CENTERED: SDL_JoystickHatState  = 0x00;
+pub const SDL_HAT_UP: SDL_JoystickHatState        = 0x01;
+pub const SDL_HAT_RIGHT: SDL_JoystickHatState     = 0x02;
+pub const SDL_HAT_DOWN: SDL_JoystickHatState      = 0x04;
+pub const SDL_HAT_LEFT: SDL_JoystickHatState      = 0x08;
+pub const SDL_HAT_RIGHTUP: SDL_JoystickHatState   = SDL_HAT_RIGHT | SDL_HAT_UP;
+pub const SDL_HAT_RIGHTDOWN: SDL_JoystickHatState = SDL_HAT_RIGHT | SDL_HAT_DOWN;
+pub const SDL_HAT_LEFTUP: SDL_JoystickHatState    = SDL_HAT_LEFT | SDL_HAT_UP;
+pub const SDL_HAT_LEFTDOWN: SDL_JoystickHatState  = SDL_HAT_LEFT | SDL_HAT_DOWN;
+
 extern "C" {
     pub fn SDL_NumJoysticks() -> c_int;
     pub fn SDL_JoystickNameForIndex(device_index: c_int) -> *const c_char;

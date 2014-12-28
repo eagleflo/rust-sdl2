@@ -467,7 +467,7 @@ impl Event {
             EventType::JoyHatMotion => {
                 let ref event = *raw.jhat();
                 Event::JoyHatMotion(event.timestamp, event.which, event.hat,
-                                    joystick::HatState::from_bits(event.value).unwrap())
+                                    joystick::wrap_hatstate(event.value))
             }
             EventType::JoyButtonDown => {
                 let ref event = *raw.jbutton();
